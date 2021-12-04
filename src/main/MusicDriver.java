@@ -57,9 +57,6 @@ public class MusicDriver {
 				case "bg":
 				case "bulkgenerate":
 					System.out.println("How many would you like to generate?");
-//					Scanner temp = new Scanner(System.in);
-//					int numberToGenerate = temp.nextInt();
-//					temp.close();
 					int numberToGenerate = 10000;
 					for(int i = 0; i<numberToGenerate; i++) {
 						bulkMelodies.add(new Motif());
