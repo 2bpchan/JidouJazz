@@ -61,7 +61,7 @@ public class MusicDriver {
 					for(int i = 0; i<numberToGenerate; i++) {
 						bulkMelodies.add(new Motif());
 					}
-;					break;
+					break;
 				case "r":
 				case "read":
 					System.out.println("File name?: ");
