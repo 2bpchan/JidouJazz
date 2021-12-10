@@ -72,7 +72,14 @@ public class Note {
 	/**
 	 * @return a NoteType enum that ISN'T a triplet
 	 */
+//	public static NoteType getRandomNonTriplet() {
+//		if(Math.random() > 0.5) {
+//			return NoteType.EIGHTH;
+//		}
+//		return NoteType.SIXTEENTH;
+//	}
 	public static NoteType getRandomNonTriplet() {
+		
 		int notePicker = (int) Math.floor(Math.random() * 5);
 		switch (notePicker) {
 		case 0:
