@@ -169,10 +169,18 @@ public class MusicDriver {
 		ArrayList<String> playableDSharp = new ArrayList<String>(
 				Arrays.asList("C", "C#", "D", "D#", "F", "F#", "G", "A#"));
 
-		playableNotesPerChord.put("G#", make234Octaves(playableGSharp));
-		playableNotesPerChord.put("G", make234Octaves(playableG));
-		playableNotesPerChord.put("C", make234Octaves(playableC));
-		playableNotesPerChord.put("D#", make234Octaves(playableDSharp));
+		ArrayList<String> keyOfDSharp = new ArrayList<>(Arrays.asList("D#", "F", "G", "G#", "A#", "C", "D", "D#"));
+
+//		playableNotesPerChord.put("G#", make234Octaves(playableGSharp));
+//		playableNotesPerChord.put("G", make234Octaves(playableG));
+//		playableNotesPerChord.put("C", make234Octaves(playableC));
+//		playableNotesPerChord.put("D#", make234Octaves(playableDSharp));
+
+		playableNotesPerChord.put("G#", make234Octaves(keyOfDSharp));
+		playableNotesPerChord.put("G", make234Octaves(keyOfDSharp));
+		playableNotesPerChord.put("C", make234Octaves(keyOfDSharp));
+		playableNotesPerChord.put("D#", make234Octaves(keyOfDSharp));
+
 		return playableNotesPerChord;
 	}
 
