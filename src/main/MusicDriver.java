@@ -340,6 +340,8 @@ public class MusicDriver {
 				Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
 		int octave = Integer.parseInt(note.substring(0, 1));
 		return notes.indexOf(note.substring(1)) + 12 * octave + 12;
+
+
 	}
 
 }

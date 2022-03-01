@@ -66,7 +66,6 @@ public class Motif implements Comparable<Motif>{
 				int noteValue = Integer.parseInt((String) currentNote.get("value"));
 				int noteStart = Integer.parseInt((String) currentNote.get("start"));
 				int noteLength = Integer.parseInt((String) currentNote.get("length"));
-				;
 				notes.add(new Note(noteValue, noteStart, noteLength));
 			}
 			this.measures.add(new Measure(notes, chord, measureNumber));

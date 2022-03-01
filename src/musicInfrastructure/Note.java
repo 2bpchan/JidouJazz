@@ -1,10 +1,16 @@
 package musicInfrastructure;
 
 public class Note {
-	int value; // can change what note this note is referring to based on
-				// what key/what chord is currently being played
-				// not to be used for calculating intervals because the notes aren't 1:1 to
-				// chromatic scale
+	int value; // value now corresponds to a value of a note in a chromatic scale, independent of its key
+	// ex: for the key of C, the notes of the chromatic scale are
+	// C, C#, D, D#, E, F, F#, G, G#, A, A#, B
+	// and the note numbers are
+	// 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+
+	// major scale is 0,2,4,5,7,9,11
+
+	int octave; // number of octaves to shift this note from the bottom
+
 	int start; // relative to 4/4 measure
 	// 96, each beat has 24 beats to work with?
 	// 96 - whole note
@@ -28,7 +34,8 @@ public class Note {
 	 * @param noteLength Constructor for creating Note objects from JSON input
 	 */
 	public Note(int noteValue, int noteStart, int noteLength) {
-		this.value = noteValue;
+		this.value = noteValue; // enforce int from 0 to 11
+
 		this.start = noteStart;
 		this.length = noteLength;
 	}
