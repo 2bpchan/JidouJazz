@@ -1,6 +1,6 @@
 package musicInfrastructure;
 
-public enum NoteType {
+public enum NoteLengthType {
 	WHOLE,
 	HALF,
 	QUARTER,

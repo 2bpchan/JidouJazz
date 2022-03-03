@@ -1,5 +1,8 @@
 package musicInfrastructure;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Note {
     int value; // value now corresponds to a value of a note in a chromatic scale, independent of its key
     // ex: for the key of C, the notes of the chromatic scale are
@@ -9,7 +12,8 @@ public class Note {
 
     // major scale is 0,2,4,5,7,9,11
 
-    int octave; // number of octaves to shift this note from the bottom
+    // this is also combined with + 12 for every octave it is shifted upwards
+
 
     int start; // relative to 4/4 measure
     // 96, each beat has 24 beats to work with?
@@ -34,21 +38,14 @@ public class Note {
      * @param noteLength Constructor for creating Note objects from JSON input
      */
     public Note(int noteValue, int noteStart, int noteLength) {
-        this.value = noteValue / 12; // enforce int from 0 to 11
-        this.octave = noteValue % 12;
+        this.value = noteValue; // enforce int from 0 to 11
         this.start = noteStart;
         this.length = noteLength;
     }
 
-    /**
-     * @param noteValue
-     * @param noteStart
-     * @param noteType  Constructor for creating Note objects from scratch, using
-     *                  NoteType instead of length
-     */
-    public Note(int noteValue, int noteStart, NoteType noteType) {
-        int noteLength = 0;
-        switch (noteType) {
+    public Note(int noteStart, NoteLengthType noteLengthType, NoteScaleType noteScaleType){
+        int noteLength = -1;
+        switch (noteLengthType) {
             case WHOLE:
                 noteLength = 96;
                 break;
@@ -71,10 +68,72 @@ public class Note {
                 noteLength = 8;
                 break;
         }
-        this.value = noteValue / 12;
-        this.octave = noteValue % 12;
         this.start = noteStart;
         this.length = noteLength;
+        this.value = getRandomNoteValue(noteScaleType, 2, 4);
+    }
+    public static int getRandomNoteValue(NoteScaleType noteScaleType, int octaveLow, int octaveHigh){
+        int octave = ((int) (Math.random() * (octaveHigh-octaveLow))) + octaveLow;
+        int pickedNote = 0;
+        switch(noteScaleType){
+            case MAJOR:
+                int[] possibleMajorNotes = {0,2,4,5,7,9,11};
+                pickedNote = (int) (Math.random() * possibleMajorNotes.length);
+                break;
+            case BLUES:
+                int[] possibleBluesNotes = {6, 0, 2, 3, 4, 7};
+                pickedNote = (int) (Math.random() * possibleBluesNotes.length);
+                break;
+        }
+        return pickedNote + (octave * 12);
+    }
+    /**
+     * @param noteValue
+     * @param noteStart
+     * @param noteLengthType  Constructor for creating Note objects from scratch, using
+     *                  NoteType instead of length TODO: REMOVE THIS, DEPRECATED CONSTRUCTOR
+     */
+    public Note(int noteValue, int noteStart, NoteLengthType noteLengthType) {
+
+        int noteLength = 0;
+        switch (noteLengthType) {
+            case WHOLE:
+                noteLength = 96;
+                break;
+            case HALF:
+                noteLength = 48;
+                break;
+            case QUARTER:
+                noteLength = 24;
+                break;
+            case EIGHTH:
+                noteLength = 12;
+                break;
+            case SIXTEENTH:
+                noteLength = 6;
+                break;
+            case HALF_TRIPLET:
+                noteLength = 16;
+                break;
+            case QUARTER_TRIPLET:
+                noteLength = 8;
+                break;
+        }
+        this.value = noteValue;
+        this.start = noteStart;
+        this.length = noteLength;
+    }
+
+    public int getNormalizedNoteValue(){
+        return this.value / 12;
+    }
+    public int getOctave(){
+        return this.value % 12;
+    }
+    public String getReadableNoteValue(){
+        ArrayList<String> notes = new ArrayList<String>(
+                Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
+        return notes.get(this.getNormalizedNoteValue());
     }
 
     /**
@@ -86,31 +145,31 @@ public class Note {
 //		}
 //		return NoteType.SIXTEENTH;
 //	}
-    public static NoteType getRandomNonTriplet() {
+    public static NoteLengthType getRandomNonTriplet() {
 
         int notePicker = (int) Math.floor(Math.random() * 5);
         switch (notePicker) {
             case 0:
-                return NoteType.WHOLE;
+                return NoteLengthType.WHOLE;
             case 1:
-                return NoteType.HALF;
+                return NoteLengthType.HALF;
             case 2:
-                return NoteType.QUARTER;
+                return NoteLengthType.QUARTER;
             case 3:
-                return NoteType.EIGHTH;
+                return NoteLengthType.EIGHTH;
             case 4:
-                return NoteType.SIXTEENTH;
+                return NoteLengthType.SIXTEENTH;
         }
-        return NoteType.QUARTER;
+        return NoteLengthType.QUARTER;
     }
 
     /**
-     * @param noteType
+     * @param noteLengthType
      * @return noteType's converted length
      */
-    public static int getNoteTypeLength(NoteType noteType) {
+    public static int getNoteTypeLength(NoteLengthType noteLengthType) {
         int noteLength = -1;
-        switch (noteType) {
+        switch (noteLengthType) {
             case WHOLE:
                 noteLength = 96;
                 break;
@@ -137,7 +196,7 @@ public class Note {
     }
 
     public String toString() {
-        return "Value: " + this.getValue() + ", " + this.start + "->" + (this.getLength() + this.start) + " ("
+        return "Value: " + this.getReadableNoteValue() + ", " + this.start + "->" + (this.getLength() + this.start) + " ("
                 + this.getLength() + ")";
     }
 

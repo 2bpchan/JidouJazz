@@ -31,7 +31,7 @@ public class Motif implements Comparable<Motif>{
 			while (beats < 96) {
 				// make notes and subtract from beats until the measure is filled
 				// add some randomness but not too much because this is still a basic test
-				NoteType type = Note.getRandomNonTriplet();
+				NoteLengthType type = Note.getRandomNonTriplet();
 				if (Note.getNoteTypeLength(type) <= 96 - beats) {
 					// note fits in the remaining beats
 					Note newNote = new Note((int) ((Math.random() * 36)) + 12, beats, type);
