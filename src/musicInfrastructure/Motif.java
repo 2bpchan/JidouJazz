@@ -34,7 +34,7 @@ public class Motif implements Comparable<Motif>{
 				NoteType type = Note.getRandomNonTriplet();
 				if (Note.getNoteTypeLength(type) <= 96 - beats) {
 					// note fits in the remaining beats
-					Note newNote = new Note((int) ((Math.random() * 24)), beats, type);
+					Note newNote = new Note((int) ((Math.random() * 36)) + 12, beats, type);
 					if (Math.random() < motifSpecificPercentRest) {
 						newNote.value = -1;
 					}

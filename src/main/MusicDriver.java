@@ -252,31 +252,31 @@ public class MusicDriver {
 	}
 
 	public static void playMeasure(Measure measure, ArrayList<String> playableNotes) throws InterruptedException {
-		switch (measure.getChord()) {
-		case "G#":
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "G":
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("2G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("2B"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3F"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "C":
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "D#":
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOn(id("4C#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		}
+//		switch (measure.getChord()) {
+//		case "G#":
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "G":
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("2G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("2B"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3F"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "C":
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "D#":
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOn(id("4C#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		}
 		for (Note n : measure.getNotes()) {
 			int noteValue = n.getValue();
 			if (noteValue == -1) {
@@ -287,32 +287,32 @@ public class MusicDriver {
 			}
 
 		}
-		switch (measure.getChord()) {
-		case "G#":
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "G":
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("2G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("2B"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3F"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "C":
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		case "D#":
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			channels[BACKGROUND_INSTRUMENT].noteOff(id("4C#"), (int) (VOLUME * backgroundVolumeMultiplier));
-			break;
-		}
-	}
+//		switch (measure.getChord()) {
+//		case "G#":
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "G":
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("2G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("2B"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3F"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "C":
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3C"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		case "D#":
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3D#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3G"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("3A#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			channels[BACKGROUND_INSTRUMENT].noteOff(id("4C#"), (int) (VOLUME * backgroundVolumeMultiplier));
+//			break;
+//		}
+}
 
 	private static void play(String note, int duration) throws InterruptedException {
 		// * start playing a note
@@ -340,8 +340,6 @@ public class MusicDriver {
 				Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
 		int octave = Integer.parseInt(note.substring(0, 1));
 		return notes.indexOf(note.substring(1)) + 12 * octave + 12;
-
-
 	}
 
 }

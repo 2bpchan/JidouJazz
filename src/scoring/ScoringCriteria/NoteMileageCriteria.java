@@ -6,9 +6,9 @@ import musicInfrastructure.Note;
 import scoring.Criteria;
 
 public class NoteMileageCriteria extends Criteria {
-	// max note mileage possible (all 16th notes and maximum jumpage) => 23*16*8 = 2944
+	// max note mileage possible (all 16th notes and maximum jumpage) => 23*16*8 = 2944 TODO: dynamically calculate this
 	public NoteMileageCriteria() {
-		this.type = "pitch";
+		this.type = "pitch"; // TODO: enum this
 		this.minPossibleScore = 0;
 		this.maxPossibleScore = 2944;
 		this.target = 0.03;
