@@ -133,6 +133,10 @@ public class MusicDriver {
 				String fileName = s.nextLine();
 				writeMotifToFile(melody, fileName);
 				break;
+			case "d":
+			case "display":
+				System.out.println(melody.toString());
+				break;
 			case "s":
 			case "score":
 				AutoScorer scorer = new AutoScorer();
@@ -252,6 +256,7 @@ public class MusicDriver {
 	}
 
 	public static void playMeasure(Measure measure, ArrayList<String> playableNotes) throws InterruptedException {
+		// TODO: move this into a Chord class or something
 //		switch (measure.getChord()) {
 //		case "G#":
 //			channels[BACKGROUND_INSTRUMENT].noteOn(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
@@ -282,11 +287,11 @@ public class MusicDriver {
 			if (noteValue == -1) {
 				rest((int) (n.getLength() * slowdownMultiplier));
 			} else {
-				String realNote = playableNotes.get(noteValue);
-				play(realNote, (int) (n.getLength() * slowdownMultiplier));
+				play(noteValue, (int) (n.getLength() * slowdownMultiplier));
 			}
 
 		}
+
 //		switch (measure.getChord()) {
 //		case "G#":
 //			channels[BACKGROUND_INSTRUMENT].noteOff(id("2G#"), (int) (VOLUME * backgroundVolumeMultiplier));
@@ -314,13 +319,13 @@ public class MusicDriver {
 //		}
 }
 
-	private static void play(String note, int duration) throws InterruptedException {
+	private static void play(int note, int duration) throws InterruptedException {
 		// * start playing a note
-		channels[INSTRUMENT].noteOn(id(note), VOLUME);
+		channels[INSTRUMENT].noteOn(note, VOLUME);
 		// * wait
 		Thread.sleep(duration);
 		// * stop playing a note
-		channels[INSTRUMENT].noteOff(id(note));
+		channels[INSTRUMENT].noteOff(note);
 	}
 
 	/**

@@ -68,9 +68,10 @@ public class Note {
                 noteLength = 8;
                 break;
         }
+
         this.start = noteStart;
         this.length = noteLength;
-        this.value = getRandomNoteValue(noteScaleType, 2, 4);
+        this.value = getRandomNoteValue(noteScaleType, 5, 6);
     }
     public static int getRandomNoteValue(NoteScaleType noteScaleType, int octaveLow, int octaveHigh){
         int octave = ((int) (Math.random() * (octaveHigh-octaveLow))) + octaveLow;
@@ -78,13 +79,14 @@ public class Note {
         switch(noteScaleType){
             case MAJOR:
                 int[] possibleMajorNotes = {0,2,4,5,7,9,11};
-                pickedNote = (int) (Math.random() * possibleMajorNotes.length);
+                pickedNote = possibleMajorNotes[(int) (Math.random() * possibleMajorNotes.length)];
                 break;
             case BLUES:
                 int[] possibleBluesNotes = {6, 0, 2, 3, 4, 7};
-                pickedNote = (int) (Math.random() * possibleBluesNotes.length);
+                pickedNote = possibleBluesNotes[(int) (Math.random() * possibleBluesNotes.length)];
                 break;
         }
+        //System.out.println("picked " + pickedNote);
         return pickedNote + (octave * 12);
     }
     /**
@@ -125,15 +127,19 @@ public class Note {
     }
 
     public int getNormalizedNoteValue(){
-        return this.value / 12;
-    }
-    public int getOctave(){
         return this.value % 12;
     }
+    public int getOctave(){
+        return this.value / 12;
+    }
     public String getReadableNoteValue(){
+        if(this.getNormalizedNoteValue() == -1){
+            return "REST";
+        }
+        int targetNote = this.getNormalizedNoteValue();
         ArrayList<String> notes = new ArrayList<String>(
                 Arrays.asList("C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"));
-        return notes.get(this.getNormalizedNoteValue());
+        return notes.get(targetNote % 12);
     }
 
     /**
@@ -196,7 +202,7 @@ public class Note {
     }
 
     public String toString() {
-        return "Value: " + this.getReadableNoteValue() + ", " + this.start + "->" + (this.getLength() + this.start) + " ("
+        return "Value: " + this.getReadableNoteValue() + "("+ this.getNormalizedNoteValue()+")" + ", " + this.start + "->" + (this.getLength() + this.start) + " ("
                 + this.getLength() + ")";
     }
 
