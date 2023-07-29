@@ -15,7 +15,7 @@ public class MidiPlayground {
             System.out.println("desc: " + info[i].getDescription());
             System.out.println("vendor: " + info[i].getVendor());
             System.out.println("version: " + info[i].getVersion());
-            if ((info[i].getName()).equals("loopMIDI Port")) {
+            if ((info[i].getName()).equals("MPK mini 3")) {
                 selectedDevice = info[i];
 
                 break;
@@ -30,13 +30,18 @@ public class MidiPlayground {
             device = MidiSystem.getMidiDevice(selectedDevice);
 
             System.out.println("Using: " + device);
-
+            if (device instanceof Synthesizer) {
+                System.out.println("Device chosen is a Synthesizer");
+            }
+            if (device instanceof Sequencer) {
+                System.out.println("Device chosen is a Sequencer");
+            }
             device.open();
 
             Transmitter transmitter = device.getTransmitter();
 
-            Receiver receiver = new PrintMidiReceiver();
-
+//            Receiver receiver = new PrintMidiReceiver();
+            Receiver receiver = new NoteMidiReceiver();
             transmitter.setReceiver(receiver);
 
 
@@ -66,12 +71,7 @@ public class MidiPlayground {
         }
 
 
-        if (device instanceof Synthesizer) {
-            System.out.println("Device chosen is a Synthesizer");
-        }
-        if (device instanceof Sequencer) {
-            System.out.println("Device chosen is a Sequencer");
-        }
+
 
 
 //        Sequence seq = null;

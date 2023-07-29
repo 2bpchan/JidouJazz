@@ -129,9 +129,6 @@ public class Note {
     public int getNormalizedNoteValue(){
         return this.value % 12;
     }
-    public int getOctave(){
-        return this.value / 12;
-    }
     public String getReadableNoteValue(){
         if(this.getNormalizedNoteValue() == -1){
             return "REST";
