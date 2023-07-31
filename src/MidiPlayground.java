@@ -8,40 +8,53 @@ import java.util.Scanner;
 public class MidiPlayground {
     public static void main(String args[]) throws InvalidMidiDataException, IOException {
         MidiDevice.Info[] info = MidiSystem.getMidiDeviceInfo();
-        MidiDevice.Info selectedDevice = null;
+        MidiDevice.Info selectedInputDevice = null; // my MIDI keyboard, or a virtual one from MIDITools
+        MidiDevice.Info selectedOutputDevice = null; // output device to write to
+
         for (int i = 0; i < info.length; i++) {
             System.out.println(i);
-            System.out.println("name: " + info[i].getName());
-            System.out.println("desc: " + info[i].getDescription());
-            System.out.println("vendor: " + info[i].getVendor());
-            System.out.println("version: " + info[i].getVersion());
-            if ((info[i].getName()).equals("MPK mini 3")) {
-                selectedDevice = info[i];
-
-                break;
+            MidiDevice.Info currentMidiDeviceInfo = info[i];
+            System.out.println("name: " + currentMidiDeviceInfo.getName());
+            System.out.println("desc: " + currentMidiDeviceInfo.getDescription());
+            System.out.println("vendor: " + currentMidiDeviceInfo.getVendor());
+            System.out.println("version: " + currentMidiDeviceInfo.getVersion());
+            if ((currentMidiDeviceInfo.getName()).equals("MPK mini 3") && currentMidiDeviceInfo.getDescription().equals("No details available")) {
+                selectedInputDevice = currentMidiDeviceInfo;
             }
+            if (info[i].getName().equals("MIDI Bridge") && currentMidiDeviceInfo.getDescription().equals("External MIDI Port")) {
+                selectedOutputDevice = currentMidiDeviceInfo;
+            }
+
         }
 
-        System.out.println("Selected: " + selectedDevice);
+        System.out.println("Selected: " + selectedInputDevice);
 
-        MidiDevice device = null;
+        MidiDevice inputDevice = null;
+        MidiDevice outputDevice = null;
 
         try {
-            device = MidiSystem.getMidiDevice(selectedDevice);
+            inputDevice = MidiSystem.getMidiDevice(selectedInputDevice);
+            outputDevice = MidiSystem.getMidiDevice(selectedOutputDevice);
 
-            System.out.println("Using: " + device);
-            if (device instanceof Synthesizer) {
+            System.out.println("Using: " + inputDevice);
+            if (inputDevice instanceof Synthesizer) {
                 System.out.println("Device chosen is a Synthesizer");
             }
-            if (device instanceof Sequencer) {
+            if (inputDevice instanceof Sequencer) {
                 System.out.println("Device chosen is a Sequencer");
             }
-            device.open();
+                inputDevice.open();
 
-            Transmitter transmitter = device.getTransmitter();
+            if (!outputDevice.isOpen()){
+                outputDevice.open();
+            }
 
+
+            Transmitter transmitter = inputDevice.getTransmitter();
+            Receiver internalReceiver = outputDevice.getReceiver();
+            Receiver receiver = new BridgeMidiReceiver(internalReceiver);
 //            Receiver receiver = new PrintMidiReceiver();
-            Receiver receiver = new NoteMidiReceiver();
+//            Receiver receiver = new NoteMidiReceiver();
             transmitter.setReceiver(receiver);
 
 
