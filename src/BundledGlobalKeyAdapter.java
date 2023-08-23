@@ -33,18 +33,6 @@ public class BundledGlobalKeyAdapter extends GlobalKeyAdapter {
         }
 
         switch(vKey){
-//            case 49:
-//                receiver.chordSelectionArray[0] = true;
-//                break;
-//            case 50:
-//                receiver.chordSelectionArray[1] = true;
-//                break;
-//            case 51:
-//                receiver.chordSelectionArray[2] = true;
-//                break;
-//            case 52:
-//                receiver.chordSelectionArray[3] = true;
-//                break;
             case 53:
                 receiver.setKey = true;
                 break;
